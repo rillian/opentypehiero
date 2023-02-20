@@ -17,9 +17,3 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - run: pytest
-      - name: test scripts
-        run: >
-          python test_extract.py
-          python test_format.py
-          python test_struct.py
-          python test_syntax.py
