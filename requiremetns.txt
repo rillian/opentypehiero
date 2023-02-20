@@ -1,0 +1,6 @@
+# Required for running the scripts
+ply
+pillow
+
+# For running tests
+pytest
