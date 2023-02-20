@@ -1,5 +1,7 @@
 # Generation of OpenType fonts for Ancient Egyptian hieroglyphic text
 
+![ci status](https://github.com/rillian/opentypehiero/actions/workflows/pytest.yml/badge.svg)
+
 Use of the code here is appropriate under the following circumstances:
 
 1. There is a relatively stable set of documents with (Unicode) encoding of Ancient
