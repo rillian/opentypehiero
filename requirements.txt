@@ -1,6 +1,7 @@
 # Required for running the scripts
 ply
 pillow
+afdko
 
 # For running tests
 pytest
