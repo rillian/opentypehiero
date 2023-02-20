@@ -1,7 +1,11 @@
 from uni_extract import extract_groups, extract_unique_group_strings
 
-groups = extract_unique_group_strings(['tests/hieropage.html'])
-print(groups)
+def test_extract(pages = ['tests/hieropage.html']):
+    groups = extract_unique_group_strings(pages)
+    print(groups)
 
-groups = extract_groups(['tests/hieropage.html'])
-print(groups)
+    groups = extract_groups(pages)
+    print(groups)
+
+if __name__ == '__main__':
+    test_extract()

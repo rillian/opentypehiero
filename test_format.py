@@ -15,48 +15,54 @@ dim = Dimensions(font)
 resolution = 100
 margin = 2
 
-f1 = codecs.open('tests/hieropage.html', encoding='utf-8')
-m = 0
-while True:
-	line = f1.readline()
-	if not line:
-		break
-	line = line.strip()
-	data = html.unescape(line)
-	fragment = parser.parse(data)
-	if fragment:
-		format_fragment(fragment, dim)
-		margin = 2
-		im = Image.new('RGB', (int(round(width_fragment(fragment, dim) * resolution)) + margin * 2, resolution + margin * 2), WHITE)
-		draw_fragment(fragment, margin, margin, ImageDraw.Draw(im), font, resolution)
-		im.save('testline' + str(m) + '.jpg')
-		m += 1
+def test_hieropage():
+    f1 = codecs.open('tests/hieropage.html', encoding='utf-8')
+    m = 0
+    while True:
+        line = f1.readline()
+        if not line:
+            break
+        line = line.strip()
+        data = html.unescape(line)
+        fragment = parser.parse(data)
+        if fragment:
+            format_fragment(fragment, dim)
+            margin = 2
+            im = Image.new('RGB', (int(round(width_fragment(fragment, dim) * resolution)) + margin * 2, resolution + margin * 2), WHITE)
+            draw_fragment(fragment, margin, margin, ImageDraw.Draw(im), font, resolution)
+            im.save('testline' + str(m) + '.jpg')
+            m += 1
 	
-top_groups = {}
-
-f2 = codecs.open('tests/hierotestsuite.html', encoding='utf-8')
-while True:
-	line = f2.readline()
-	if not line:
-		break
-	line = line.strip()
-	data = html.unescape(line)
-	fragment = parser.parse(data)
-	if fragment:
-		for g in fragment.groups:
-			top_groups[g.to_string()] = g
-
 def bylength(w1, w2):
 	return len(w2)-len(w1)
 
-strings = sorted(top_groups.keys(), key=len, reverse=True)
+def test_hierosuite():
+    top_groups = {}
 
-n = 0
-# strings = [html.unescape("&#x13171;&#x13433;&#x133cf;")]
-for g in strings:
-	group = top_groups[g]
-	format_top_group(group, dim)
-	im = Image.new('RGB', (int(round(width_top(group, dim) * resolution)), resolution), WHITE)
-	draw_top(group, 0, 0, ImageDraw.Draw(im), font, resolution)
-	im.save('testgroup' + str(n) + '.jpg')
-	n += 1
+    f2 = codecs.open('tests/hierotestsuite.html', encoding='utf-8')
+    while True:
+        line = f2.readline()
+        if not line:
+            break
+        line = line.strip()
+        data = html.unescape(line)
+        fragment = parser.parse(data)
+        if fragment:
+            for g in fragment.groups:
+                top_groups[g.to_string()] = g
+
+    strings = sorted(top_groups.keys(), key=len, reverse=True)
+
+    n = 0
+    # strings = [html.unescape("&#x13171;&#x13433;&#x133cf;")]
+    for g in strings:
+        group = top_groups[g]
+        format_top_group(group, dim)
+        im = Image.new('RGB', (int(round(width_top(group, dim) * resolution)), resolution), WHITE)
+        draw_top(group, 0, 0, ImageDraw.Draw(im), font, resolution)
+        im.save('testgroup' + str(n) + '.jpg')
+        n += 1
+
+if __name__ == '__main__':
+    test_hieropage()
+    test_hierosuite()
