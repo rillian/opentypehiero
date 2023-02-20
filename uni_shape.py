@@ -230,6 +230,6 @@ def analyse(f):
 	shape_file = f + '.json'
 	try:
 		f = open(shape_file, 'w')
-		json.dump(sizes, f)
+		json.dump(sizes, f, sort_keys=True, indent=2)
 	except FileNotFoundError:
 		print(shape_file + ' not found')
